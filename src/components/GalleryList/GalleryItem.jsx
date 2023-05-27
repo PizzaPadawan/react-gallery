@@ -1,19 +1,22 @@
 import { useState } from "react"
+import axios from "axios";
 import "./GalleryList.css"
 
-export default function GalleryItem({ key, path, description, likes }) {
+export default function GalleryItem({ getGallery, item }) {
+
+    const likeCounter = (imgId) => {
+        axios.put(`/gallery/like/${imgId}`)
+            .then(() => getGallery())
+            .catch((err) => alert(err));
+    }
 
     const [showDescription, setShowDescription] = useState(false);
-
-    const containerStyle = {
-        position: 'relative',
-    };
 
     const backgroundStyle = {
         position: 'absolute',
         width: '250px',
         height: '250px',
-        backgroundImage: `url(${path})`,
+        backgroundImage: `url(${item.path})`,
         backgroundSize: 'cover',
         filter: 'blur(8px)',
         zIndex: -1,
@@ -21,13 +24,13 @@ export default function GalleryItem({ key, path, description, likes }) {
 
 
     return (
-        <div className="galleryItem" key={key}>
-                {showDescription
-                    ? <><div style={backgroundStyle} />
-                    <p className="caption" onClick={() => setShowDescription(false)}>{description}</p></>
-                    : <><img src={path} onClick={() => setShowDescription(true)} /></>}
-            <p className="likes">{likes} likes</p>
-            <button className="likes">&hearts;</button>
+        <div className="galleryItem" key={item.id}>
+            {showDescription
+                ? <><div style={backgroundStyle} />
+                    <p className="caption" onClick={() => setShowDescription(false)}>{item.description}</p></>
+                : <><img  src={item.path} onClick={() => setShowDescription(true)} /></>}
+            <p>{item.likes} likes</p>
+            <button onClick={() => likeCounter(item.id)}>&hearts;</button>
         </div>
     )
 
