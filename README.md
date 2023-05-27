@@ -13,14 +13,15 @@ Additional README details can be found [here](https://github.com/PrimeAcademy/re
 
 components
     - App
-        [] - axios GET request
-        [] - useState galleryArray
+        [x] - axios GET request
+        [x] - useState galleryArray
     - GalleryList
-        [] - map over array created from GET request and pass it into GalleryItem
+        [x] - map over array created from GET request and pass it into GalleryItem
     - GalleryItem
-        [] - conditional rendering using local state to swap the image with the description onClick
+        [x] - conditional rendering using local state to swap the image with the description onClick
         [] - Add 'Like' button and keep track of number of likes (axios PUT request)
-        [] - Update gallery each time a button is clicked (run GET req)
+        [] - Update gallery each time the like button is clicked (run GET req)
+        [] - css to make all items cards of the same size
 
 ### Stretch Goals:
 
