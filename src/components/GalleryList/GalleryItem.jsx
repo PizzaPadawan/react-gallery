@@ -18,7 +18,9 @@ export default function GalleryItem({ getGallery, item }) {
         height: '250px',
         backgroundImage: `url(${item.path})`,
         backgroundSize: 'cover',
-        filter: 'blur(8px)',
+        backgroundPosition: 'center',
+        borderRadius: '10px',
+        filter: 'blur(1px)',
         zIndex: -1,
     };
 

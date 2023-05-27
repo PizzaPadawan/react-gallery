@@ -19,13 +19,13 @@ components
         [x] - map over array created from GET request and pass it into GalleryItem
     - GalleryItem
         [x] - conditional rendering using local state to swap the image with the description onClick
-        [] - Add 'Like' button and keep track of number of likes (axios PUT request)
-        [] - Update gallery each time the like button is clicked (run GET req)
-        [] - css to make all items cards of the same size
+        [x] - Add 'Like' button and keep track of number of likes (axios PUT request)
+        [x] - Update gallery each time the like button is clicked (run GET req)
+        [x] - css to make all items cards of the same size
 
 ### Stretch Goals:
 
-git branchin'
+git branchin
 
     [] - Move the data into a database called 'react_gallery' and include database.sql file
     [] - Add a form to POST a new gallery item
