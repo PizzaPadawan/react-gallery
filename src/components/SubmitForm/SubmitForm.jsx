@@ -1,7 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
+import { Button, Container, TextField } from "@mui/material";
 
-export default function SubmitForm({getGallery}) {
+export default function SubmitForm({ getGallery }) {
 
     let [newPath, setNewPath] = useState();
     let [newDesc, setNewDesc] = useState();
@@ -22,14 +23,29 @@ export default function SubmitForm({getGallery}) {
     }
 
     return (
-        <div>
+        <Container>
             <h3>Add to the Gallery:</h3>
-            <input type="text" placeholder="image url here"
-                value={newPath} onChange={(e) => setNewPath(e.target.value)} />
-            <input type="text" placeholder="poetic caption here"
-                value={newDesc} onChange={(e) => setNewDesc(e.target.value)} />
-            <button onClick={() => newPost()}>Post</button>
-        </div>
+            <TextField
+                id="outlined-basic"
+                variant="outlined"
+                type="text"
+                label="image url"
+                value={newPath}
+                onChange={(e) => setNewPath(e.target.value)} />
+            <TextField id="outlined-multiline-flexible"
+                multiline
+                maxRows={4}
+                type="text"
+                label="poetic caption"
+                value={newDesc}
+                onChange={(e) => setNewDesc(e.target.value)} />
+            <br></br>
+            <Button
+                size="large"
+                variant="text"
+                color="success"
+                onClick={() => newPost()}>Post</Button>
+        </Container>
     )
 
 }
