@@ -10,6 +10,12 @@ export default function GalleryItem({ getGallery, item }) {
             .catch((err) => alert(err));
     }
 
+    const deletePost = (imgId) => {
+        axios.delete(`/gallery/${imgId}`)
+            .then(() => getGallery())
+            .catch((err) => alert(err));
+    }
+
     const [showDescription, setShowDescription] = useState(false);
 
     const backgroundStyle = {
@@ -33,6 +39,7 @@ export default function GalleryItem({ getGallery, item }) {
                 : <><img  src={item.path} onClick={() => setShowDescription(true)} /></>}
             <p>{item.likes} likes</p>
             <button onClick={() => likeCounter(item.id)}>&hearts;</button>
+            <button onClick={() => deletePost(item.id)}>X</button>
         </div>
     )
 

@@ -31,7 +31,7 @@ git branchin
 [x] - Add a form to POST a new gallery item
     [x] - Client side form with absolute url for images
     [x] - Server side route
-[] - Ability to delete a gallery item
+[x] - Ability to delete a gallery item
 [] - Material-UI styling
     [] - monkeytype retrocast color pallete and font styles
     [x] - All GalleryItems are cards, uniform size
