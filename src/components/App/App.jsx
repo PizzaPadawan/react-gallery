@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './App.css';
 import axios from 'axios';
 import GalleryList from '../GalleryList/GalleryList';
+import SubmitForm from '../SubmitForm/SubmitForm';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <header className="App-header">
           <h1 className="App-title">Gallery of My Life</h1>
         </header>
+        <SubmitForm getGallery={getGallery}/>
         <GalleryList galleryArray={galleryArray} getGallery={getGallery}/>
       </div>
     );
