@@ -27,7 +27,7 @@ components
 
 git branchin
 
-    [] - Move the data into a database called 'react_gallery' and include database.sql file
+    [x] - Move the data into a database called 'react_gallery' and include database.sql file
     [] - Add a form to POST a new gallery item
         [] - Client side form with absolute url for images
         [] - Server side route

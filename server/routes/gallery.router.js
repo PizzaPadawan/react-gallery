@@ -31,4 +31,15 @@ router.get('/', (req, res) => {
     });
 }); // END GET Route
 
+router.post('/', (req, res) => {
+    const path = req.body.path;
+    const description = req.body.description;
+    const queryText = `INSERT INTO gallery (path, description)
+    VALUES ($1, $2);`;
+
+    pool.query(queryText, [path, description])
+    .then(() => res.sendStatus(201))
+    .catch((err) => console.log('error posting new content', err))
+});
+
 module.exports = router;
