@@ -41,8 +41,8 @@ export default function GalleryItem({ getGallery, item }) {
 
     const backgroundStyle = {
         position: 'absolute',
-        width: '250px',
-        height: '250px',
+        width: '247px',
+        height: '247px',
         backgroundImage: `url(${item.path})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',

@@ -1,14 +1,41 @@
-# Project Name
-
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
+# Gallery of my Life
 
 ## Description
 
-Your project description goes here. What problem did you solve? How did you solve it?
+This is an Instagram style image gallery built using React for my weekend challenge on React week.
+Users can click on an image to read its caption, like and delete gallery posts, as well as create new posts with a valid image path and description.
 
-Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).
+## Screenshot
+![A screenshot of the project](/public/images/Screenshot.png)
+
+## Installation
+
+1. Create a new database called `react-gallery` and run the queries provided in the `react_gallery.sql` file.
+2. Once you've opened the project in your editor of choice, run `npm install`.
+3. Open 2 terminals. In one, run `npm run server` and in the other, run `npm run client`.
+
+## Usage
+
+- Enter a valid image path in the "image url" input field
+- Write an applicable caption in the "poetic caption" field
+- Click the `POST` button to post your image and caption.
+- Click the `&hearts;` button to add a 'like' to a gallery item.
+- Click the trash can button to delete a gallery item.
+
+## Built with
+[node.js](https://nodejs.org/en)
+[npm](https://www.npmjs.com/)
+[React](https://react.dev/)
+[Express.js](https://expressjs.com/)
+[axios](https://axios-http.com/docs/intro)
+[postgresql](https://www.postgresql.org/)
+[SweetAlert2](https://sweetalert2.github.io/)
+[Material UI](https://mui.com/)
 
 ## TODO
+
+Here's some insight on how I built this project. The file structure and back end was already provided for me via template.
+
 ### Base mode:
 
 components
@@ -32,8 +59,7 @@ git branchin
     [x] - Client side form with absolute url for images
     [x] - Server side route
 [x] - Ability to delete a gallery item
-[] - Material-UI styling
-    [] - monkeytype retrocast color pallete and font styles
+[x] - Material-UI styling
     [x] - All GalleryItems are cards, uniform size
     [x] - Caption appears over blurred, darkened image in readable font
     [x] - Like button heart, delete button x (with SweetAlert confirmation dialogue)
