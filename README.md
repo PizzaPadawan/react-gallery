@@ -19,7 +19,7 @@ Users can click on an image to read its caption, like and delete gallery posts, 
 - Enter a valid image path in the "image url" input field
 - Write an applicable caption in the "poetic caption" field
 - Click the `POST` button to post your image and caption.
-- Click the `&hearts;` button to add a 'like' to a gallery item.
+- Click the &hearts; button to add a 'like' to a gallery item.
 - Click the trash can button to delete a gallery item.
 
 ## Built with
