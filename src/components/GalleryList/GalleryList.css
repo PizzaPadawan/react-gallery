@@ -15,10 +15,6 @@
     border-radius: 10px;
 }
 
-.galleryItem button {
-    margin: 1%;
-}
-
 .caption {
     background-color: rgba(0,0,0,.40);
     display: flex;
@@ -34,8 +30,8 @@
 }
 
 img {
-    width: 250px;
-    height: 250px;
+    width: 247px;
+    height: 247px;
     object-fit: cover;
     border-radius: 10px;
     border: 1px solid antiquewhite;
