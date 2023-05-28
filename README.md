@@ -23,14 +23,14 @@ Users can click on an image to read its caption, like and delete gallery posts, 
 - Click the trash can button to delete a gallery item.
 
 ## Built with
-[node.js](https://nodejs.org/en)
-[npm](https://www.npmjs.com/)
-[React](https://react.dev/)
-[Express.js](https://expressjs.com/)
-[axios](https://axios-http.com/docs/intro)
-[postgresql](https://www.postgresql.org/)
-[SweetAlert2](https://sweetalert2.github.io/)
-[Material UI](https://mui.com/)
+- [node.js](https://nodejs.org/en)
+- [npm](https://www.npmjs.com/)
+- [React](https://react.dev/)
+- [Express.js](https://expressjs.com/)
+- [axios](https://axios-http.com/docs/intro)
+- [postgresql](https://www.postgresql.org/)
+- [SweetAlert2](https://sweetalert2.github.io/)
+- [Material UI](https://mui.com/)
 
 ## TODO
 
