@@ -28,10 +28,10 @@ components
 git branchin
 
 [x] - Move the data into a database called 'react_gallery' and include database.sql file
-[] - Add a form to POST a new gallery item
-    [] - Client side form with absolute url for images
+[x] - Add a form to POST a new gallery item
+    [x] - Client side form with absolute url for images
     [x] - Server side route
-[] - Ability to delete a gallery item
+[x] - Ability to delete a gallery item
 [] - Material-UI styling
     [] - monkeytype retrocast color pallete and font styles
     [x] - All GalleryItems are cards, uniform size
