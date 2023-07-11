@@ -2,7 +2,7 @@ const pg = require('pg');
 const Pool = pg.Pool;
 const pool = new Pool({
     host: process.env.PORT || 'localhost',
-    database: 'react_gallery',
+    database: process.env.DATABASE_URL || 'react_gallery',
     port: 5432
 })
 
