@@ -2,10 +2,14 @@ import { useState } from "react";
 import axios from "axios";
 import { Button, Container, TextField } from "@mui/material";
 
-export default function SubmitForm({ getGallery }) {
+interface Props {
+    getGallery: () => void;
+}
 
-    let [newPath, setNewPath] = useState();
-    let [newDesc, setNewDesc] = useState();
+const SubmitForm: React.FC<Props> = ({ getGallery }) => {
+
+    let [newPath, setNewPath] = useState<string>('');
+    let [newDesc, setNewDesc] = useState<string>('');
 
     const newPost = () => {
         const posty = {
@@ -49,3 +53,5 @@ export default function SubmitForm({ getGallery }) {
     )
 
 }
+
+export default SubmitForm;
