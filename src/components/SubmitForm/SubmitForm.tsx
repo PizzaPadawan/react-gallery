@@ -1,6 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
-import { Button, Container, TextField } from "@mui/material";
+import {
+    Button,
+    Grid,
+    TextField,
+    Typography,
+}
+    from "@mui/material";
 
 interface Props {
     getGallery: () => void;
@@ -27,29 +33,38 @@ const SubmitForm: React.FC<Props> = ({ getGallery }) => {
     }
 
     return (
-        <Container>
-            <h3>Add to the Gallery:</h3>
-            <TextField
-                id="outlined-basic"
-                variant="outlined"
-                type="text"
-                label="image url"
-                value={newPath}
-                onChange={(e) => setNewPath(e.target.value)} />
-            <TextField id="outlined-multiline-flexible"
-                multiline
-                maxRows={4}
-                type="text"
-                label="poetic caption"
-                value={newDesc}
-                onChange={(e) => setNewDesc(e.target.value)} />
-            <br></br>
-            <Button
-                size="large"
-                variant="text"
-                color="success"
-                onClick={() => newPost()}>Post</Button>
-        </Container>
+        <Grid container sx={{ pb: 2, m: 'auto', display: 'flex', flexDirection: 'column', alignContent: 'center' }} >
+            <Grid item xs={12}>
+                <Typography
+                    align='center'
+                    variant="h6"
+                    variantMapping={{ h6: 'h2' }}
+                >Add to the Gallery:
+                </Typography>
+            </Grid>
+            <Grid item xs={12} sx={{ my: 1 }}>
+                <TextField
+                    sx={{ width: '13em', mx: 1 }}
+                    type="text"
+                    label="image url"
+                    value={newPath}
+                    onChange={(e) => setNewPath(e.target.value)} />
+                <TextField
+                    sx={{ width: '13em', mx: 1 }}
+                    multiline
+                    maxRows={4}
+                    type="text"
+                    label="poetic caption"
+                    value={newDesc}
+                    onChange={(e) => setNewDesc(e.target.value)} />
+                <Button
+                    sx={{ m: 1 }}
+                    size="large"
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => newPost()}>Post</Button>
+            </Grid>
+        </Grid>
     )
 
 }

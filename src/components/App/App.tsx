@@ -88,9 +88,9 @@ const App: React.FC = () => {
       <CssBaseline />
       <Container>
         <Container maxWidth='md' >
-          <Paper sx={{ m: 2 }}>
+          <Paper sx={{ my: 2 }}>
             <Typography
-              sx={{p:3}}
+              sx={{ p: 3 }}
               align='center'
               variant="h3"
               color="primary"
