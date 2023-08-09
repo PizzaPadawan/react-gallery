@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import './App.css';
 import axios from 'axios';
 
 // interface
@@ -86,20 +85,18 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <Container>
-        <Container maxWidth='md' >
-          <Paper sx={{ my: 2 }}>
-            <Typography
-              sx={{ p: 3 }}
-              align='center'
-              variant="h3"
-              color="primary"
-              variantMapping={{ h3: "h1" }}>
-              Gallery of My Life
-            </Typography>
-            <SubmitForm getGallery={getGallery} />
-          </Paper>
-        </Container>
+      <Container maxWidth='md' >
+        <Paper sx={{ my: 2 }}>
+          <Typography
+            sx={{ p: 3 }}
+            align='center'
+            variant="h3"
+            color="primary"
+            variantMapping={{ h3: "h1" }}>
+            Gallery of My Life
+          </Typography>
+          <SubmitForm getGallery={getGallery} />
+        </Paper>
         <GalleryList galleryArray={galleryArray} getGallery={getGallery} />
       </Container>
     </ThemeProvider >

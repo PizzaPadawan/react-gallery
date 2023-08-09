@@ -2,18 +2,25 @@ import { useState } from "react"
 import axios from "axios";
 import "./GalleryList.css"
 import Swal from "sweetalert2";
-import { IconButton } from "@mui/material";
 import { Item } from "../../Item";
+
+import {
+    IconButton,
+    Card,
+    CardMedia,
+    CardActionArea,
+    CardContent,
+    Typography
+} from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-
-interface Props{
+interface Props {
     getGallery: () => void;
     item: Item;
 }
 
-const GalleryItem: React.FC<Props> = ({getGallery, item}) => {
+const GalleryItem: React.FC<Props> = ({ getGallery, item }) => {
 
     const likeCounter = (imgId: number) => {
         axios.put(`/gallery/like/${imgId}`)
@@ -26,9 +33,11 @@ const GalleryItem: React.FC<Props> = ({getGallery, item}) => {
             title: 'Are you sure?',
             text: "This post will be deleted forever!",
             icon: 'warning',
+            background: '#191f28',
+            color: '#c69f68',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
+            confirmButtonColor: '#b81b2c',
+            cancelButtonColor: '#4b5975',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
@@ -46,33 +55,69 @@ const GalleryItem: React.FC<Props> = ({getGallery, item}) => {
 
     const [showDescription, setShowDescription] = useState<boolean>(false);
 
+    // styles
+    const containerStyle: React.CSSProperties = {
+        position: 'relative',
+        height: '250px',
+    };
+
     const backgroundStyle: React.CSSProperties = {
+
         position: 'absolute',
-        width: '247px',
-        height: '247px',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
         backgroundImage: `url(${item.path})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        borderRadius: '10px',
-        filter: 'blur(1px)',
-        zIndex: -1,
-    }
+    };
+
+    const textStyle: React.CSSProperties = {
+        zIndex: 1,
+        padding: 'auto 0',
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        backdropFilter: 'blur(2px) brightness(0.4)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    };
 
     return (
-            <div className="galleryItem" key={item.id}>
-                {showDescription
-                    ? <><div style={backgroundStyle} />
-                        <p className="caption" onClick={() => setShowDescription(false)}>{item.description}</p></>
-                    : <><img src={item.path} onClick={() => setShowDescription(true)} /></>}
-                <p>{item.likes} likes</p>
-                <IconButton size="small" color="error" onClick={() => likeCounter(item.id)}>
-                    <FavoriteIcon fontSize="small" />
-                </IconButton>
-                <IconButton aria-label="delete" size="small" color="secondary" onClick={() => deletePost(item.id)}>
-                    <DeleteIcon fontSize="small" />
-                 </IconButton>
-            </div>
-            )
+        <Card key={item.id}>
+            {showDescription
+                ? <>
+                    <CardActionArea sx={containerStyle} onClick={() => setShowDescription(false)}>
+                        <div style={backgroundStyle}>
+                            <Typography sx={textStyle} align='center' variant="body1" onClick={() => setShowDescription(false)}>
+                                {item.description}
+                            </Typography>
+                        </div>
+                    </CardActionArea>
+                </>
+                : <CardActionArea>
+                    <CardMedia sx={{ height: '250px' }} image={item.path} onClick={() => setShowDescription(true)} />
+                </CardActionArea>
+            }
+            <CardContent>
+                <Typography align='center' variant='body2'>{item.likes} likes</Typography>
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}>
+                    <IconButton size="small" color="error" onClick={() => likeCounter(item.id)}>
+                        <FavoriteIcon fontSize="small" />
+                    </IconButton>
+                    <IconButton aria-label="delete" size="small" color="secondary" onClick={() => deletePost(item.id)}>
+                        <DeleteIcon fontSize="small" />
+                    </IconButton>
+                </div>
+            </CardContent>
+        </Card >
+    )
 
 }
 
