@@ -3,18 +3,25 @@ import axios from "axios";
 import "./GalleryList.css"
 import Swal from "sweetalert2";
 import { IconButton } from "@mui/material";
+import { Item } from "../../Item";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function GalleryItem({ getGallery, item }) {
 
-    const likeCounter = (imgId) => {
+interface Props{
+    getGallery: () => void;
+    item: Item;
+}
+
+const GalleryItem: React.FC<Props> = ({getGallery, item}) => {
+
+    const likeCounter = (imgId: number) => {
         axios.put(`/gallery/like/${imgId}`)
             .then(() => getGallery())
             .catch((err) => alert(err));
     }
 
-    const deletePost = (imgId) => {
+    const deletePost = (imgId: number) => {
         Swal.fire({
             title: 'Are you sure?',
             text: "This post will be deleted forever!",
@@ -37,9 +44,9 @@ export default function GalleryItem({ getGallery, item }) {
         })
     }
 
-    const [showDescription, setShowDescription] = useState(false);
+    const [showDescription, setShowDescription] = useState<boolean>(false);
 
-    const backgroundStyle = {
+    const backgroundStyle: React.CSSProperties = {
         position: 'absolute',
         width: '247px',
         height: '247px',
@@ -49,8 +56,7 @@ export default function GalleryItem({ getGallery, item }) {
         borderRadius: '10px',
         filter: 'blur(1px)',
         zIndex: -1,
-    };
-
+    }
 
     return (
             <div className="galleryItem" key={item.id}>
@@ -69,3 +75,5 @@ export default function GalleryItem({ getGallery, item }) {
             )
 
 }
+
+export default GalleryItem;

@@ -9,16 +9,22 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.2",
     "@sweetalert2/theme-dark": "^5.0.15",
+    "@types/node": "^20.4.8",
+    "@types/react": "^18.2.19",
+    "@types/react-dom": "^18.2.7",
     "axios": "^0.19.2",
     "express": "^4.17.1",
     "pg": "^8.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1",
-    "sweetalert2": "^11.7.5"
+    "sweetalert2": "^11.7.5",
+    "typescript": "^5.1.6"
   },
   "devDependencies": {
-    "nodemon": "^1.18.4"
+    "nodemon": "^1.18.4",
+    "source-map-loader": "^4.0.1",
+    "ts-loader": "^9.4.4"
   },
   "scripts": {
     "start": "react-scripts build && node server/server.js",
