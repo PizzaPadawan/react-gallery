@@ -7,28 +7,40 @@ const pool = require('../modules/pool');
 
 // PUT Route
 router.put('/like/:id', (req, res) => {
-    console.log(req.params);
     const galleryId = req.params.id;
     const queryText = `UPDATE gallery SET "likes"="likes"+1 WHERE "id"=$1;`
 
     pool.query(queryText, [galleryId])
-    .then(() => res.sendStatus(200))
-    .catch((err) => {
-        console.log('Error updating likes', err);
-        res.sendStatus(500);
-    })
+        .then(() => res.sendStatus(200))
+        .catch((err) => {
+            console.log('Error updating likes', err);
+            res.sendStatus(500);
+        })
 }); // END PUT Route
+
+router.put('/caption/:id', (req, res) => {
+    const galleryId = req.params.id;
+    const description = req.body.description;
+    const queryText = `UPDATE gallery SET "description"=$1 WHERE "id"=$2;`
+
+    pool.query(queryText, [description, galleryId])
+        .then(() => res.sendStatus(200))
+        .catch((err) => {
+            console.log('Error updating caption', err);
+            res.sendStatus(500);
+        })
+});
 
 // GET Route
 router.get('/', (req, res) => {
     const queryText = `SELECT * FROM gallery ORDER BY id;`
 
     pool.query(queryText)
-    .then((result) => res.send(result.rows))
-    .catch((err) => {
-        console.log('Error retreiving gallery', err);
-        res.sendStatus(500);
-    });
+        .then((result) => res.send(result.rows))
+        .catch((err) => {
+            console.log('Error retreiving gallery', err);
+            res.sendStatus(500);
+        });
 }); // END GET Route
 
 router.post('/', (req, res) => {
@@ -38,8 +50,8 @@ router.post('/', (req, res) => {
     VALUES ($1, $2);`;
 
     pool.query(queryText, [path, description])
-    .then(() => res.sendStatus(201))
-    .catch((err) => console.log('error posting new content', err))
+        .then(() => res.sendStatus(201))
+        .catch((err) => console.log('error posting new content', err))
 });
 
 router.delete('/:id', (req, res) => {
@@ -48,11 +60,11 @@ router.delete('/:id', (req, res) => {
     const queryText = `DELETE FROM gallery WHERE "id"=$1;`
 
     pool.query(queryText, [galleryId])
-    .then(() => res.sendStatus(204))
-    .catch((err) => {
-        console.log('Error deleting post', err);
-        res.sendStatus(500);
-    })
+        .then(() => res.sendStatus(204))
+        .catch((err) => {
+            console.log('Error deleting post', err);
+            res.sendStatus(500);
+        })
 });
 
 module.exports = router;
