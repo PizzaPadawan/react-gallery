@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 // interface
@@ -72,13 +73,11 @@ const App: React.FC = () => {
     likes: 0
   }]);
 
+  const dispatch = useDispatch();
+  const gallery = useSelector(store => store);
+
   const getGallery = () => {
-    axios.get('/gallery')
-      .then((response) => {
-        console.log(response.data)
-        setGalleryArray(response.data)
-      })
-      .catch(err => alert(err))
+
   }
 
 
