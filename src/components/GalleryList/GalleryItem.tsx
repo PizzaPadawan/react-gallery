@@ -1,6 +1,5 @@
 import { useState, Dispatch, SetStateAction } from "react"
 import { useDispatch } from 'react-redux';
-import axios from "axios";
 import "./GalleryList.css"
 import Swal from "sweetalert2";
 import { Item } from "../../Item";
@@ -19,15 +18,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 interface Props {
-    getGallery: () => void;
     item: Item;
-    editMode: boolean,
     setEditMode: Dispatch<SetStateAction<boolean>>
-    selected: Item,
     setSelected: Dispatch<SetStateAction<Item>>
 }
 
-const GalleryItem: React.FC<Props> = ({ getGallery, item, editMode, setEditMode, selected, setSelected }) => {
+const GalleryItem: React.FC<Props> = ({ item, setEditMode, setSelected }) => {
 
     const [showDescription, setShowDescription] = useState<boolean>(false);
     const dispatch = useDispatch();
@@ -47,7 +43,7 @@ const GalleryItem: React.FC<Props> = ({ getGallery, item, editMode, setEditMode,
     const deletePost = (item: Item) => {
         Swal.fire({
             title: 'Are you sure?',
-            text: "This post will be deleted forever!",
+            text: "This post will be deleted! (But only temporarily, I guess.)s",
             icon: 'warning',
             background: '#191f28',
             color: '#c69f68',
@@ -62,12 +58,11 @@ const GalleryItem: React.FC<Props> = ({ getGallery, item, editMode, setEditMode,
                     'This post has been deleted.',
                     'success'
                 )
-
+                dispatch({
+                    type: "DELETE_GALLERY",
+                    payload: item
+                })
             }
-            dispatch({
-                type: "DELETE_GALLERY",
-                payload: item
-            })
         })
     }
 

@@ -8,14 +8,11 @@ import { useSelector } from 'react-redux';
 import { Grid } from '@mui/material'
 
 interface Props {
-    getGallery: () => void;
-    editMode: boolean,
     setEditMode: Dispatch<SetStateAction<boolean>>
-    selected: Item,
     setSelected: Dispatch<SetStateAction<Item>>
 }
 
-const GalleryList: React.FC<Props> = ({ getGallery, editMode, setEditMode, selected, setSelected }) => {
+const GalleryList: React.FC<Props> = ({ setEditMode, setSelected }) => {
 
     const galleryArray = useSelector((state: { gallery: Item[] }) => state.gallery);
 
@@ -23,7 +20,7 @@ const GalleryList: React.FC<Props> = ({ getGallery, editMode, setEditMode, selec
         <Grid container spacing={3}>
             {galleryArray.length > 0 && galleryArray.map(item => (
                 <Grid item key="id" xs={4}>
-                    <GalleryItem getGallery={getGallery} item={item} editMode={editMode} setEditMode={setEditMode} selected={selected} setSelected={setSelected} />
+                    <GalleryItem item={item} setEditMode={setEditMode} setSelected={setSelected} />
                 </Grid>
             ))}
         </Grid>

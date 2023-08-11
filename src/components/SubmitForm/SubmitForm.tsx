@@ -10,14 +10,13 @@ import {
     from "@mui/material";
 
 interface Props {
-    getGallery: () => void;
     editMode: boolean;
     setEditMode: Dispatch<SetStateAction<boolean>>;
     selected: Item;
     setSelected: Dispatch<SetStateAction<Item>>;
 }
 
-const SubmitForm: React.FC<Props> = ({ getGallery, editMode, setEditMode, selected, setSelected }) => {
+const SubmitForm: React.FC<Props> = ({ editMode, setEditMode, selected, setSelected }) => {
 
     const [newPath, setNewPath] = useState<string>('');
     const [newDesc, setNewDesc] = useState<string>('');
@@ -69,7 +68,7 @@ const SubmitForm: React.FC<Props> = ({ getGallery, editMode, setEditMode, select
     }
 
     return (
-        <Grid container sx={{ pb: 2, m: 'auto', display: 'flex', flexDirection: 'column', alignContent: 'center' }} >
+        <Grid container sx={{ py: 2, m: 'auto', display: 'flex', flexDirection: 'column', alignContent: 'center' }} >
             <Grid item xs={12}>
                 <Typography
                     align='center'
