@@ -1,14 +1,16 @@
 import { Item } from "../../Item";
 
-const galleryReducer = (state: Item[], action: { type: string, payload: { path?: string, description?: string } }) => {
+const initialState: Item[] = [];
+
+const galleryReducer = (state: Item[] = initialState, action: { type: string, payload: { id: number, path: string, description: string, likes: number } }) => {
     switch (action.type) {
         case "SET_GALLERY":
             return action.payload;
         case "POST_GALLERY":
             return [...state, action.payload]
-        case "PUT_GALLERY":
+        case "PUT_DESCRIPTION":
             let putState = state.map(item => {
-                if (item.path === action.payload.path) {
+                if (item.id === action.payload.id) {
                     return {
                         ...item,
                         description: action.payload.description,
@@ -16,8 +18,18 @@ const galleryReducer = (state: Item[], action: { type: string, payload: { path?:
                 } else return item
             })
             return putState;
+        case "PUT_LIKE":
+            let pootisState = state.map(item => {
+                if (item.id === action.payload.id) {
+                    return {
+                        ...item,
+                        likes: action.payload.likes
+                    }
+                } else return item
+            })
+            return pootisState;
         case "DELETE_GALLERY":
-            return state.filter(item => item.path !== action.payload)
+            return state.filter(item => item.id !== action.payload.id)
         default:
             return state;
     }

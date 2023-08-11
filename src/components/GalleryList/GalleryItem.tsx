@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState, Dispatch, SetStateAction } from "react"
+import { useDispatch } from 'react-redux';
 import axios from "axios";
 import "./GalleryList.css"
 import Swal from "sweetalert2";
@@ -10,17 +11,26 @@ import {
     CardMedia,
     CardActionArea,
     CardContent,
-    Typography
+    Typography,
+    Tooltip
 } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 interface Props {
     getGallery: () => void;
     item: Item;
+    editMode: boolean,
+    setEditMode: Dispatch<SetStateAction<boolean>>
+    selected: Item,
+    setSelected: Dispatch<SetStateAction<Item>>
 }
 
-const GalleryItem: React.FC<Props> = ({ getGallery, item }) => {
+const GalleryItem: React.FC<Props> = ({ getGallery, item, editMode, setEditMode, selected, setSelected }) => {
+
+    const [showDescription, setShowDescription] = useState<boolean>(false);
+    const dispatch = useDispatch();
 
     const likeCounter = (imgId: number) => {
         axios.put(`/gallery/like/${imgId}`)
@@ -46,14 +56,10 @@ const GalleryItem: React.FC<Props> = ({ getGallery, item }) => {
                     'This post has been deleted.',
                     'success'
                 )
-                axios.delete(`/gallery/${imgId}`)
-                    .then(() => getGallery())
-                    .catch((err) => alert(err));
+
             }
         })
     }
-
-    const [showDescription, setShowDescription] = useState<boolean>(false);
 
     // styles
     const containerStyle: React.CSSProperties = {
@@ -86,7 +92,7 @@ const GalleryItem: React.FC<Props> = ({ getGallery, item }) => {
     };
 
     return (
-        <Card key={item.id}>
+        <Card>
             {showDescription
                 ? <>
                     <CardActionArea sx={containerStyle} onClick={() => setShowDescription(false)}>
@@ -108,12 +114,21 @@ const GalleryItem: React.FC<Props> = ({ getGallery, item }) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}>
-                    <IconButton size="small" color="error" onClick={() => likeCounter(item.id)}>
-                        <FavoriteIcon fontSize="small" />
-                    </IconButton>
-                    <IconButton aria-label="delete" size="small" color="secondary" onClick={() => deletePost(item.id)}>
-                        <DeleteIcon fontSize="small" />
-                    </IconButton>
+                    <Tooltip title="Edit Description">
+                        <IconButton aria-label="edit" size="small" color="primary" onClick={() => { setSelected(item); setEditMode(true); }}>
+                            <EditIcon fontSize="small" />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Add Like">
+                        <IconButton aria-label="like" size="small" color="error" onClick={() => likeCounter(item.id)}>
+                            <FavoriteIcon fontSize="small" />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Delete post">
+                        <IconButton aria-label="delete" size="small" color="secondary" onClick={() => deletePost(item.id)}>
+                            <DeleteIcon fontSize="small" />
+                        </IconButton>
+                    </Tooltip>
                 </div>
             </CardContent>
         </Card >
