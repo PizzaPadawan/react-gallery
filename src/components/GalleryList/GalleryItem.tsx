@@ -32,13 +32,13 @@ const GalleryItem: React.FC<Props> = ({ getGallery, item, editMode, setEditMode,
     const [showDescription, setShowDescription] = useState<boolean>(false);
     const dispatch = useDispatch();
 
-    const likeCounter = (imgId: number) => {
-        axios.put(`/gallery/like/${imgId}`)
-            .then(() => getGallery())
-            .catch((err) => alert(err));
+    const likeCounter = (item: Item) => {
+        dispatch({
+            type: "PUT_LIKE"
+        })
     }
 
-    const deletePost = (imgId: number) => {
+    const deletePost = (item: Item) => {
         Swal.fire({
             title: 'Are you sure?',
             text: "This post will be deleted forever!",
@@ -58,6 +58,10 @@ const GalleryItem: React.FC<Props> = ({ getGallery, item, editMode, setEditMode,
                 )
 
             }
+            dispatch({
+                type: "DELETE_GALLERY",
+                payload: item
+            })
         })
     }
 
@@ -120,12 +124,12 @@ const GalleryItem: React.FC<Props> = ({ getGallery, item, editMode, setEditMode,
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="Add Like">
-                        <IconButton aria-label="like" size="small" color="error" onClick={() => likeCounter(item.id)}>
+                        <IconButton aria-label="like" size="small" color="error" onClick={() => likeCounter(item)}>
                             <FavoriteIcon fontSize="small" />
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="Delete post">
-                        <IconButton aria-label="delete" size="small" color="secondary" onClick={() => deletePost(item.id)}>
+                        <IconButton aria-label="delete" size="small" color="secondary" onClick={() => deletePost(item)}>
                             <DeleteIcon fontSize="small" />
                         </IconButton>
                     </Tooltip>

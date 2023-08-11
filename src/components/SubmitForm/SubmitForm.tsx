@@ -57,6 +57,7 @@ const SubmitForm: React.FC<Props> = ({ getGallery, editMode, setEditMode, select
 
     const clearEdit = () => {
         setNewDesc('');
+        setNewPath('');
         setSelected({
             id: 0,
             path: '',
