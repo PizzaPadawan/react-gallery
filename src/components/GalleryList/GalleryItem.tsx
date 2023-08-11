@@ -34,7 +34,13 @@ const GalleryItem: React.FC<Props> = ({ getGallery, item, editMode, setEditMode,
 
     const likeCounter = (item: Item) => {
         dispatch({
-            type: "PUT_LIKE"
+            type: "PUT_LIKE",
+            payload: {
+                id: item.id,
+                path: item.path,
+                description: item.description,
+                likes: (item.likes + 1)
+            }
         })
     }
 
