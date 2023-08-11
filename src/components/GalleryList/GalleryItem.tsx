@@ -1,5 +1,5 @@
-import { useState } from "react"
-import axios from "axios";
+import { useState, Dispatch, SetStateAction } from "react"
+import { useDispatch } from 'react-redux';
 import "./GalleryList.css"
 import Swal from "sweetalert2";
 import { Item } from "../../Item";
@@ -10,28 +10,40 @@ import {
     CardMedia,
     CardActionArea,
     CardContent,
-    Typography
+    Typography,
+    Tooltip
 } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 interface Props {
-    getGallery: () => void;
     item: Item;
+    setEditMode: Dispatch<SetStateAction<boolean>>
+    setSelected: Dispatch<SetStateAction<Item>>
 }
 
-const GalleryItem: React.FC<Props> = ({ getGallery, item }) => {
+const GalleryItem: React.FC<Props> = ({ item, setEditMode, setSelected }) => {
 
-    const likeCounter = (imgId: number) => {
-        axios.put(`/gallery/like/${imgId}`)
-            .then(() => getGallery())
-            .catch((err) => alert(err));
+    const [showDescription, setShowDescription] = useState<boolean>(false);
+    const dispatch = useDispatch();
+
+    const likeCounter = (item: Item) => {
+        dispatch({
+            type: "PUT_LIKE",
+            payload: {
+                id: item.id,
+                path: item.path,
+                description: item.description,
+                likes: (item.likes + 1)
+            }
+        })
     }
 
-    const deletePost = (imgId: number) => {
+    const deletePost = (item: Item) => {
         Swal.fire({
             title: 'Are you sure?',
-            text: "This post will be deleted forever!",
+            text: "This post will be deleted! (But only temporarily, I guess.)s",
             icon: 'warning',
             background: '#191f28',
             color: '#c69f68',
@@ -46,14 +58,13 @@ const GalleryItem: React.FC<Props> = ({ getGallery, item }) => {
                     'This post has been deleted.',
                     'success'
                 )
-                axios.delete(`/gallery/${imgId}`)
-                    .then(() => getGallery())
-                    .catch((err) => alert(err));
+                dispatch({
+                    type: "DELETE_GALLERY",
+                    payload: item
+                })
             }
         })
     }
-
-    const [showDescription, setShowDescription] = useState<boolean>(false);
 
     // styles
     const containerStyle: React.CSSProperties = {
@@ -86,7 +97,7 @@ const GalleryItem: React.FC<Props> = ({ getGallery, item }) => {
     };
 
     return (
-        <Card key={item.id}>
+        <Card>
             {showDescription
                 ? <>
                     <CardActionArea sx={containerStyle} onClick={() => setShowDescription(false)}>
@@ -108,12 +119,21 @@ const GalleryItem: React.FC<Props> = ({ getGallery, item }) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}>
-                    <IconButton size="small" color="error" onClick={() => likeCounter(item.id)}>
-                        <FavoriteIcon fontSize="small" />
-                    </IconButton>
-                    <IconButton aria-label="delete" size="small" color="secondary" onClick={() => deletePost(item.id)}>
-                        <DeleteIcon fontSize="small" />
-                    </IconButton>
+                    <Tooltip title="Edit Description">
+                        <IconButton aria-label="edit" size="small" color="primary" onClick={() => { setSelected(item); setEditMode(true); }}>
+                            <EditIcon fontSize="small" />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Add Like">
+                        <IconButton aria-label="like" size="small" color="error" onClick={() => likeCounter(item)}>
+                            <FavoriteIcon fontSize="small" />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Delete post">
+                        <IconButton aria-label="delete" size="small" color="secondary" onClick={() => deletePost(item)}>
+                            <DeleteIcon fontSize="small" />
+                        </IconButton>
+                    </Tooltip>
                 </div>
             </CardContent>
         </Card >

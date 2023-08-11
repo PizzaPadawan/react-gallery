@@ -1,5 +1,6 @@
-import { useState } from "react";
-import axios from "axios";
+import { useState, Dispatch, SetStateAction } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { Item } from "../../Item";
 import {
     Button,
     Grid,
@@ -9,31 +10,65 @@ import {
     from "@mui/material";
 
 interface Props {
-    getGallery: () => void;
+    editMode: boolean;
+    setEditMode: Dispatch<SetStateAction<boolean>>;
+    selected: Item;
+    setSelected: Dispatch<SetStateAction<Item>>;
 }
 
-const SubmitForm: React.FC<Props> = ({ getGallery }) => {
+const SubmitForm: React.FC<Props> = ({ editMode, setEditMode, selected, setSelected }) => {
 
-    let [newPath, setNewPath] = useState<string>('');
-    let [newDesc, setNewDesc] = useState<string>('');
+    const [newPath, setNewPath] = useState<string>('');
+    const [newDesc, setNewDesc] = useState<string>('');
+    const dispatch = useDispatch();
+    const galleryArray = useSelector((state: { gallery: Item[] }) => state.gallery);
 
     const newPost = () => {
-        const posty = {
+        const postItem = {
+            id: (galleryArray[galleryArray.length - 1].id + 1),
             path: newPath,
-            description: newDesc
+            description: newDesc,
+            likes: 0
         }
 
-        axios.post('/gallery', posty)
-            .then(() => {
-                setNewPath('')
-                setNewDesc('')
-                getGallery();
-            })
-            .catch((err) => alert(err));
+        dispatch({
+            type: "POST_GALLERY",
+            payload: postItem
+        });
+
+        clearEdit();
+    }
+
+    const editDescription = (item: Item) => {
+
+        dispatch({
+            type: "PUT_DESCRIPTION",
+            payload: {
+                id: item.id,
+                path: item.path,
+                description: newDesc,
+                likes: item.likes,
+            }
+        });
+
+        clearEdit();
+    }
+
+    const clearEdit = () => {
+        setNewDesc('');
+        setNewPath('');
+        setSelected({
+            id: 0,
+            path: '',
+            description: '',
+            likes: 0,
+        });
+        setEditMode(false);
+
     }
 
     return (
-        <Grid container sx={{ pb: 2, m: 'auto', display: 'flex', flexDirection: 'column', alignContent: 'center' }} >
+        <Grid container sx={{ py: 2, m: 'auto', display: 'flex', flexDirection: 'column', alignContent: 'center' }} >
             <Grid item xs={12}>
                 <Typography
                     align='center'
@@ -55,16 +90,33 @@ const SubmitForm: React.FC<Props> = ({ getGallery }) => {
                     maxRows={4}
                     type="text"
                     label="poetic caption"
-                    value={newDesc}
+                    value={newDesc || selected.description}
                     onChange={(e) => setNewDesc(e.target.value)} />
-                <Button
-                    sx={{ m: 1 }}
-                    size="large"
-                    variant="contained"
-                    color="secondary"
-                    onClick={() => newPost()}>Post</Button>
+                {editMode
+                    ? <>
+                        <Button
+                            sx={{ m: 1 }}
+                            size="large"
+                            variant="contained"
+                            color="secondary"
+                            onClick={() => editDescription(selected)}>Save</Button>
+                        <Button
+                            sx={{ m: 1 }}
+                            size="large"
+                            variant="contained"
+                            color="secondary"
+                            onClick={() => clearEdit()}>Cancel</Button>
+                    </>
+
+                    : <Button
+                        sx={{ m: 1 }}
+                        size="large"
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => newPost()}>Post</Button>
+                }
             </Grid>
-        </Grid>
+        </Grid >
     )
 
 }
