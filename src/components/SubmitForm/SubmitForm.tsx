@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction } from "react";
+import React, { useState, Dispatch, SetStateAction } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Item } from "../../Item";
 import {

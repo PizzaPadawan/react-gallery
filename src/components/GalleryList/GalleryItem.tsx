@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction } from "react"
+import React, { useState, Dispatch, SetStateAction } from "react"
 import { useDispatch } from 'react-redux';
 import "./GalleryList.css"
 import Swal from "sweetalert2";
@@ -43,7 +43,7 @@ const GalleryItem: React.FC<Props> = ({ item, setEditMode, setSelected }) => {
     const deletePost = (item: Item) => {
         Swal.fire({
             title: 'Are you sure?',
-            text: "This post will be deleted! (But only temporarily, I guess.)s",
+            text: "This post will be deleted! (But only temporarily, I guess.)",
             icon: 'warning',
             background: '#191f28',
             color: '#c69f68',
