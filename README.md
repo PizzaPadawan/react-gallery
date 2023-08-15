@@ -11,7 +11,7 @@ This is a simplified Instagram clone, and it was really fun to make. Not only di
 Thanks for checking this out!
 
 ## Screenshot
-![A screenshot of the project](/public/images/Screenshot.png)
+![A screenshot of the project](/public/images/screenshot.png)
 
 ## Usage
 
