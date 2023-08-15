@@ -16,16 +16,16 @@ Thanks for checking this out!
 ## Usage
 
 - Click on an image to view its caption.
-To post a new image:
-- Enter a valid image path in the "image url" input field.
-- Write an applicable caption in the "poetic caption" field.
-- Click the `POST` button to post your image and caption.
-To edit the caption for an image:
-- Click the pencil button to edit the caption for an item.
-- Once you're in edit mode, the current caption will appear in the caption field, where you can save or cancel your changes.
-Additional features:
-- Click the &hearts; button to add a 'like' to a gallery item.
-- Click the trash can button to delete a gallery item.
+- To post a new image:
+    - Enter a valid image path in the "image url" input field.
+    - Write an applicable caption in the "poetic caption" field.
+    - Click the `POST` button to post your image and caption.
+- To edit the caption for an image:
+    - Click the pencil button to edit the caption for an item.
+    - Once you're in edit mode, the current caption will appear in the caption field, where you can save or cancel your changes.
+- Additional features:
+    - Click the &hearts; button to add a 'like' to a gallery item.
+    - Click the trash can button to delete a gallery item.
 
 ## Built with
 - [PostgreSQL](https://www.postgresql.org/)
