@@ -2,9 +2,8 @@ import './GalleryItem'
 // import './GalleryList.css'
 import GalleryItem from './GalleryItem'
 import { Item } from '../../Item'
-import { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { useSelector } from 'react-redux';
-
 import { Grid } from '@mui/material'
 
 interface Props {
